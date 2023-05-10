@@ -10,12 +10,14 @@
 		B572AC1F2A0C2F7000012B07 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B572AC1E2A0C2F7000012B07 /* AppDelegate.swift */; };
 		B572AC212A0C2F7000012B07 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B572AC202A0C2F7000012B07 /* SceneDelegate.swift */; };
 		B572AC232A0C2F7000012B07 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B572AC222A0C2F7000012B07 /* ViewController.swift */; };
-		B572AC262A0C2F7000012B07 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B572AC242A0C2F7000012B07 /* Main.storyboard */; };
 		B572AC282A0C2F7100012B07 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B572AC272A0C2F7100012B07 /* Assets.xcassets */; };
 		B572AC2B2A0C2F7100012B07 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B572AC292A0C2F7100012B07 /* LaunchScreen.storyboard */; };
 		B572AC362A0C2F7100012B07 /* OrderfyTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B572AC352A0C2F7100012B07 /* OrderfyTests.swift */; };
 		B572AC402A0C2F7100012B07 /* OrderfyUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B572AC3F2A0C2F7100012B07 /* OrderfyUITests.swift */; };
 		B572AC422A0C2F7200012B07 /* OrderfyUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B572AC412A0C2F7200012B07 /* OrderfyUITestsLaunchTests.swift */; };
+		B572AC532A0C320800012B07 /* MainTabContainerController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B572AC522A0C320800012B07 /* MainTabContainerController.swift */; };
+		B572AC552A0C33CE00012B07 /* OrderViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B572AC542A0C33CE00012B07 /* OrderViewController.swift */; };
+		B572AC582A0C34DB00012B07 /* OrdersArchiveViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B572AC572A0C34DB00012B07 /* OrdersArchiveViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -40,7 +42,6 @@
 		B572AC1E2A0C2F7000012B07 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		B572AC202A0C2F7000012B07 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
 		B572AC222A0C2F7000012B07 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
-		B572AC252A0C2F7000012B07 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		B572AC272A0C2F7100012B07 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		B572AC2A2A0C2F7100012B07 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		B572AC2C2A0C2F7100012B07 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -49,6 +50,9 @@
 		B572AC3B2A0C2F7100012B07 /* OrderfyUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = OrderfyUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		B572AC3F2A0C2F7100012B07 /* OrderfyUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrderfyUITests.swift; sourceTree = "<group>"; };
 		B572AC412A0C2F7200012B07 /* OrderfyUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrderfyUITestsLaunchTests.swift; sourceTree = "<group>"; };
+		B572AC522A0C320800012B07 /* MainTabContainerController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTabContainerController.swift; sourceTree = "<group>"; };
+		B572AC542A0C33CE00012B07 /* OrderViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrderViewController.swift; sourceTree = "<group>"; };
+		B572AC572A0C34DB00012B07 /* OrdersArchiveViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrdersArchiveViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -99,10 +103,10 @@
 		B572AC1D2A0C2F7000012B07 /* Orderfy */ = {
 			isa = PBXGroup;
 			children = (
+				B572AC4E2A0C309500012B07 /* Scenes */,
 				B572AC1E2A0C2F7000012B07 /* AppDelegate.swift */,
 				B572AC202A0C2F7000012B07 /* SceneDelegate.swift */,
 				B572AC222A0C2F7000012B07 /* ViewController.swift */,
-				B572AC242A0C2F7000012B07 /* Main.storyboard */,
 				B572AC272A0C2F7100012B07 /* Assets.xcassets */,
 				B572AC292A0C2F7100012B07 /* LaunchScreen.storyboard */,
 				B572AC2C2A0C2F7100012B07 /* Info.plist */,
@@ -125,6 +129,48 @@
 				B572AC412A0C2F7200012B07 /* OrderfyUITestsLaunchTests.swift */,
 			);
 			path = OrderfyUITests;
+			sourceTree = "<group>";
+		};
+		B572AC4E2A0C309500012B07 /* Scenes */ = {
+			isa = PBXGroup;
+			children = (
+				B572AC562A0C34C100012B07 /* OrdersArchive */,
+				B572AC512A0C31A500012B07 /* MainTabContainer */,
+				B572AC502A0C30CF00012B07 /* PlaceOrder */,
+				B572AC4F2A0C30C400012B07 /* Orders */,
+			);
+			path = Scenes;
+			sourceTree = "<group>";
+		};
+		B572AC4F2A0C30C400012B07 /* Orders */ = {
+			isa = PBXGroup;
+			children = (
+				B572AC542A0C33CE00012B07 /* OrderViewController.swift */,
+			);
+			path = Orders;
+			sourceTree = "<group>";
+		};
+		B572AC502A0C30CF00012B07 /* PlaceOrder */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = PlaceOrder;
+			sourceTree = "<group>";
+		};
+		B572AC512A0C31A500012B07 /* MainTabContainer */ = {
+			isa = PBXGroup;
+			children = (
+				B572AC522A0C320800012B07 /* MainTabContainerController.swift */,
+			);
+			path = MainTabContainer;
+			sourceTree = "<group>";
+		};
+		B572AC562A0C34C100012B07 /* OrdersArchive */ = {
+			isa = PBXGroup;
+			children = (
+				B572AC572A0C34DB00012B07 /* OrdersArchiveViewController.swift */,
+			);
+			path = OrdersArchive;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -233,7 +279,6 @@
 			files = (
 				B572AC2B2A0C2F7100012B07 /* LaunchScreen.storyboard in Resources */,
 				B572AC282A0C2F7100012B07 /* Assets.xcassets in Resources */,
-				B572AC262A0C2F7000012B07 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -258,6 +303,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B572AC582A0C34DB00012B07 /* OrdersArchiveViewController.swift in Sources */,
+				B572AC532A0C320800012B07 /* MainTabContainerController.swift in Sources */,
+				B572AC552A0C33CE00012B07 /* OrderViewController.swift in Sources */,
 				B572AC232A0C2F7000012B07 /* ViewController.swift in Sources */,
 				B572AC1F2A0C2F7000012B07 /* AppDelegate.swift in Sources */,
 				B572AC212A0C2F7000012B07 /* SceneDelegate.swift in Sources */,
@@ -297,14 +345,6 @@
 /* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
-		B572AC242A0C2F7000012B07 /* Main.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				B572AC252A0C2F7000012B07 /* Base */,
-			);
-			name = Main.storyboard;
-			sourceTree = "<group>";
-		};
 		B572AC292A0C2F7100012B07 /* LaunchScreen.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
@@ -442,7 +482,6 @@
 				INFOPLIST_FILE = Orderfy/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
-				INFOPLIST_KEY_UIMainStoryboardFile = Main;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -470,7 +509,6 @@
 				INFOPLIST_FILE = Orderfy/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
-				INFOPLIST_KEY_UIMainStoryboardFile = Main;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				LD_RUNPATH_SEARCH_PATHS = (
