@@ -12,7 +12,7 @@ protocol OrderDetailsPresentationLogic
   func presentOrder(response: OrderDetails.GetOrder.Response)
 }
 
-class ShowOrderPresenter: OrderDetailsPresentationLogic
+class OrderDetailsPresenter: OrderDetailsPresentationLogic
 {
   weak var viewController: OrderDetailsDisplayLogic?
   

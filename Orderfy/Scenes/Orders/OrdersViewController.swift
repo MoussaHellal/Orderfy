@@ -135,4 +135,8 @@ extension OrdersViewController: UITableViewDelegate, UITableViewDataSource {
         
         return cell
     }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        self.router?.routeToOrderDetails()
+    }
 }
