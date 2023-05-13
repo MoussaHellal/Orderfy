@@ -10,8 +10,8 @@
 - Add Order.
 - Change Order status subsequently.
 - Search by Order Id or name.
-- Set Order to Deliever with respect to the queue(First-IN - First-OUT).
-- Order are sent to Order Archives after 15 seconds mark.
+- Set Order to deliver with respect to the queue(First-IN - First-OUT).
+- Orders are sent to Order Archives after the 15 seconds mark.
 - Open Order Details in List of Current Order or in Archived Orders.
 
 ## UI
