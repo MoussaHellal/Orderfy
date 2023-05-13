@@ -72,6 +72,15 @@ class ListOrdersInteractor: OrdersBusinessLogic, OrdersDataStore {
             self.presenter?.presentUpdateOrder(response: response)
             return
         }
+        
+        let orderToUpdate = orders?.filter { $0.id == request.id}.first
+
+        if  orderToUpdate?.status.index ?? 0 > request.status.index {
+            let errorMessage = "Once you move an order to the next status, you can't go back"
+            let response = Orders.UpdateOrder.Response(errorMessage: errorMessage, order: nil)
+            self.presenter?.presentUpdateOrder(response: response)
+            return
+        }
 
         ordersWorker.updateOrder(id: request.id, status: request.status) { (order: Order?) in
             let response = Orders.UpdateOrder.Response(order: order)

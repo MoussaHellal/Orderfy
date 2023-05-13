@@ -8,18 +8,15 @@
 import Foundation
 import UIKit
 
-@objc protocol OrderDetailsRoutingLogic
-{
+@objc protocol OrderDetailsRoutingLogic {
   func routeToOrders()
 }
 
-protocol OrderDetailsDataPassing
-{
+protocol OrderDetailsDataPassing {
   var dataStore: OrderDetailsDataStore? { get }
 }
 
-class OrderDetailsRouter: NSObject, OrderDetailsRoutingLogic, OrderDetailsDataPassing
-{
+class OrderDetailsRouter: NSObject, OrderDetailsRoutingLogic, OrderDetailsDataPassing {
   weak var viewController: OrderDetailsController?
   var dataStore: OrderDetailsDataStore?
   

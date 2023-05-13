@@ -7,26 +7,22 @@
 
 import UIKit
 
-protocol OrderDetailsBusinessLogic
-{
+protocol OrderDetailsBusinessLogic {
   func getOrder(request: OrderDetails.GetOrder.Request)
 }
 
-protocol OrderDetailsDataStore
-{
+protocol OrderDetailsDataStore {
   var order: Order! { get set }
 }
 
-class OrderDetailsInteractor: OrderDetailsBusinessLogic, OrderDetailsDataStore
-{
+class OrderDetailsInteractor: OrderDetailsBusinessLogic, OrderDetailsDataStore {
   var presenter: OrderDetailsPresentationLogic?
   
   var order: Order!
   
   // MARK: - Get order
   
-  func getOrder(request: OrderDetails.GetOrder.Request)
-  {
+  func getOrder(request: OrderDetails.GetOrder.Request){
     let response = OrderDetails.GetOrder.Response(order: order)
     presenter?.presentOrder(response: response)
   }

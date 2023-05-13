@@ -105,27 +105,26 @@ class OrderTableViewCell: UITableViewCell {
         orderNameLabel.text = order.name
         switch order.status {
         case .new:
-            statusButton.tintColor = UIColor.gray
+            statusButton.tintColor = OrderStatus.new.color
             statusButton.setTitle(OrderStatus.new.rawValue, for: .normal)
-            (statusButton.menu?.children[0] as? UIAction)?.state = .on
-            (statusButton.menu?.children[0] as? UIAction)?.title = OrderStatus.new.rawValue
+            (statusButton.menu?.children[OrderStatus.new.index] as? UIAction)?.state = .on
+            (statusButton.menu?.children[OrderStatus.new.index] as? UIAction)?.title = OrderStatus.new.rawValue
         case .preparing:
-            statusButton.tintColor = UIColor.orange
+            statusButton.tintColor = OrderStatus.preparing.color
             statusButton.setTitle(OrderStatus.preparing.rawValue, for: .normal)
-            (statusButton.menu?.children[1] as? UIAction)?.state = .on
-            (statusButton.menu?.children[1] as? UIAction)?.title = OrderStatus.preparing.rawValue
+            (statusButton.menu?.children[OrderStatus.preparing.index] as? UIAction)?.state = .on
+            (statusButton.menu?.children[OrderStatus.preparing.index] as? UIAction)?.title = OrderStatus.preparing.rawValue
         case .ready:
-            statusButton.tintColor = UIColor.purple
+            statusButton.tintColor = OrderStatus.ready.color
             statusButton.setTitle(OrderStatus.ready.rawValue, for: .normal)
-            (statusButton.menu?.children[2] as? UIAction)?.state = .on
-            (statusButton.menu?.children[2] as? UIAction)?.title = OrderStatus.ready.rawValue
+            (statusButton.menu?.children[OrderStatus.ready.index] as? UIAction)?.state = .on
+            (statusButton.menu?.children[OrderStatus.ready.index] as? UIAction)?.title = OrderStatus.ready.rawValue
             statusButton.setNeedsLayout()
-
         case .delivered:
-            statusButton.tintColor = UIColor.blue
+            statusButton.tintColor = OrderStatus.delivered.color
             statusButton.setTitle(OrderStatus.delivered.rawValue, for: .normal)
-            (statusButton.menu?.children[3] as? UIAction)?.state = .on
-            (statusButton.menu?.children[3] as? UIAction)?.title = OrderStatus.delivered.rawValue
+            (statusButton.menu?.children[OrderStatus.delivered.index] as? UIAction)?.state = .on
+            (statusButton.menu?.children[OrderStatus.delivered.index] as? UIAction)?.title = OrderStatus.delivered.rawValue
             statusButton.setNeedsLayout()
             runTimer()
         }

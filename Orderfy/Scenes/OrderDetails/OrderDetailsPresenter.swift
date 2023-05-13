@@ -7,13 +7,11 @@
 
 import UIKit
 
-protocol OrderDetailsPresentationLogic
-{
+protocol OrderDetailsPresentationLogic {
   func presentOrder(response: OrderDetails.GetOrder.Response)
 }
 
-class OrderDetailsPresenter: OrderDetailsPresentationLogic
-{
+class OrderDetailsPresenter: OrderDetailsPresentationLogic {
   weak var viewController: OrderDetailsDisplayLogic?
   
   let dateFormatter: DateFormatter = {
@@ -26,8 +24,7 @@ class OrderDetailsPresenter: OrderDetailsPresentationLogic
   
   // MARK: - Get order
   
-  func presentOrder(response: OrderDetails.GetOrder.Response)
-  {
+  func presentOrder(response: OrderDetails.GetOrder.Response) {
     let order = response.order
     
     let date = dateFormatter.string(from: order.date)
