@@ -53,10 +53,6 @@ class OrderTableViewCell: UITableViewCell {
     private lazy var dateHolder: Date = {
          Date()
     }()
-
-    var seconds = 15
-    var timer = Timer()
-    var isTimeRunning = false
     
     var delegate: OrderStatusSelectionDelegate!
 
@@ -103,42 +99,36 @@ class OrderTableViewCell: UITableViewCell {
         dateHolder = order.date.getDate()
         orderLabel.text = "Nº : \(order.id)"
         orderNameLabel.text = order.name
+        orderCounter.text = ""
         switch order.status {
         case .new:
             statusButton.tintColor = OrderStatus.new.color
             statusButton.setTitle(OrderStatus.new.rawValue, for: .normal)
             (statusButton.menu?.children[OrderStatus.new.index] as? UIAction)?.state = .on
             (statusButton.menu?.children[OrderStatus.new.index] as? UIAction)?.title = OrderStatus.new.rawValue
+            orderCounter.text = ""
         case .preparing:
             statusButton.tintColor = OrderStatus.preparing.color
             statusButton.setTitle(OrderStatus.preparing.rawValue, for: .normal)
             (statusButton.menu?.children[OrderStatus.preparing.index] as? UIAction)?.state = .on
             (statusButton.menu?.children[OrderStatus.preparing.index] as? UIAction)?.title = OrderStatus.preparing.rawValue
+            orderCounter.text = ""
         case .ready:
             statusButton.tintColor = OrderStatus.ready.color
             statusButton.setTitle(OrderStatus.ready.rawValue, for: .normal)
             (statusButton.menu?.children[OrderStatus.ready.index] as? UIAction)?.state = .on
             (statusButton.menu?.children[OrderStatus.ready.index] as? UIAction)?.title = OrderStatus.ready.rawValue
             statusButton.setNeedsLayout()
+            orderCounter.text = ""
         case .delivered:
             statusButton.tintColor = OrderStatus.delivered.color
             statusButton.setTitle(OrderStatus.delivered.rawValue, for: .normal)
             (statusButton.menu?.children[OrderStatus.delivered.index] as? UIAction)?.state = .on
             (statusButton.menu?.children[OrderStatus.delivered.index] as? UIAction)?.title = OrderStatus.delivered.rawValue
             statusButton.setNeedsLayout()
-            runTimer()
         }
     }
-    
-    func runTimer() {
-        Timer.scheduledTimer(timeInterval: 1, target: self, selector: (#selector(self.updateTimer)), userInfo: nil, repeats: true)
-    }
-    
-    @objc func updateTimer() {
-        seconds -= 1
-        orderCounter.text = "\(seconds)"
-    }
-    
+
     func getOrderStatusUIAction() -> [UIAction] {
         
         let orderStatusSelectionChanged = { (action: UIAction) in

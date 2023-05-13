@@ -18,6 +18,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         window = UIWindow(frame: UIScreen.main.bounds)
         let mainTabContainerController = MainTabContainerController()
         self.window?.rootViewController = mainTabContainerController
+        window?.overrideUserInterfaceStyle = .light
         window?.makeKeyAndVisible()
         window?.windowScene = windowScene
     }
