@@ -53,31 +53,18 @@ class ListOrdersInteractor: OrdersBusinessLogic, OrdersDataStore {
     }
     
     func updateOrderStatus(request: Orders.UpdateOrder.Request) {
-        let ordersPrior = orders?.filter { $0.id < request.id
-                                         && $0.status != .delivered
-                                        && request.status == .delivered }
+        let validOrder = validateOrderUpdate(request: request)
         
-        let preparingOrder = orders?.filter { $0.status == .preparing}
-        
-        if ordersPrior?.count ?? 0 > 0  {
-            let errorMessage = "You cannot mark an order as Delievered before marking the orders that came before it as Delivered."
-            let response = Orders.UpdateOrder.Response(errorMessage: errorMessage, order: nil)
+        guard validOrder.valid else {
+            let response = Orders.UpdateOrder.Response(errorMessage: validOrder.errorMessage, order: nil)
             self.presenter?.presentUpdateOrder(response: response)
             return
         }
+      
+        let validStatusSubsequent = validateOrderSubsequestStatus(forRequest: request)
         
-        if  preparingOrder?.count ?? 0 >= 3 {
-            let errorMessage = "You won't be able to mark it as Preparing ⌛ because there are already 3 orders currently in that status."
-            let response = Orders.UpdateOrder.Response(errorMessage: errorMessage, order: nil)
-            self.presenter?.presentUpdateOrder(response: response)
-            return
-        }
-        
-        let orderToUpdate = orders?.filter { $0.id == request.id}.first
-
-        if  orderToUpdate?.status.index ?? 0 > request.status.index {
-            let errorMessage = "Once you move an order to the next status, you can't go back"
-            let response = Orders.UpdateOrder.Response(errorMessage: errorMessage, order: nil)
+        guard validStatusSubsequent.valid else {
+            let response = Orders.UpdateOrder.Response(errorMessage: validOrder.errorMessage, order: nil)
             self.presenter?.presentUpdateOrder(response: response)
             return
         }
@@ -117,4 +104,34 @@ class ListOrdersInteractor: OrdersBusinessLogic, OrdersDataStore {
         self.presenter?.presentFetchedOrders(response: response)
     }
     
+    //MARK: Validate Order Deliever status is correct & Validate Preparing is not more than 3
+    
+    private func validateOrderUpdate(request: Orders.UpdateOrder.Request) -> (valid: Bool, errorMessage: String) {
+        let ordersQueueDelievered = orders?.filter { $0.id < request.id
+                                         && $0.status != .delivered
+                                        && request.status == .delivered }
+        
+        let preparingOrder = orders?.filter { $0.status == .preparing}
+        
+        if ordersQueueDelievered?.count ?? 0 > 0  {
+            let errorMessage = "You cannot mark an order as Delievered before marking the orders that came before it as Delivered."
+            return (valid: false, errorMessage: errorMessage)
+        }
+        
+        if  preparingOrder?.count ?? 0 >= 3 {
+            let errorMessage = "You won't be able to mark it as Preparing ⌛ because there are already 3 orders currently in that status."
+            return (valid: false, errorMessage: errorMessage)
+        }
+        return (valid: true, errorMessage: "")
+    }
+    
+    private func validateOrderSubsequestStatus(forRequest request: Orders.UpdateOrder.Request) -> (valid: Bool, errorMessage: String) {
+        let orderToUpdate = orders?.filter { $0.id == request.id}.first
+        
+        if  orderToUpdate?.status.index ?? 0 > request.status.index {
+            let errorMessage = "Once you move an order to the next status, you can't go back"
+            return (valid: false, errorMessage : errorMessage)
+        }
+        return (valid: true, errorMessage: "")
+    }
 }
