@@ -7,7 +7,7 @@
 
 import Foundation
 
-class OrdersMemStore: OrdersStoreProtocol {
+class OrdersMemoryStore: OrdersStoreProtocol {
     // MARK: - Data
     
     static var orders = [Order]()

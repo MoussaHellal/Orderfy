@@ -19,7 +19,7 @@ protocol OrdersArchiveDataStore {
 class ListOrdersArchiveInteractor: OrdersArchiveBusinessLogic, OrdersArchiveDataStore {
     var presenter: OrdersArchivePresentationLogic?
     
-    var ordersArchiveWorker = OrdersArchiveWorker(OrdersArchiveStore: OrdersMemStore())
+    var ordersArchiveWorker = OrdersArchiveWorker(OrdersArchiveStore: OrdersMemoryStore())
     var ordersArchive: [Order]?
     
     // MARK: - Fetch OrdersArchive

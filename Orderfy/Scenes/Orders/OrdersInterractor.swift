@@ -21,7 +21,7 @@ protocol OrdersDataStore {
 class ListOrdersInteractor: OrdersBusinessLogic, OrdersDataStore {    
     var presenter: OrdersPresentationLogic?
     
-    var ordersWorker = OrdersWorker(ordersStore: OrdersMemStore())
+    var ordersWorker = OrdersWorker(ordersStore: OrdersMemoryStore())
     var orders: [Order]?
     
     // MARK: - Fetch orders

@@ -30,7 +30,7 @@
 		B572AC712A0C498900012B07 /* OrderDetailsPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = B572AC702A0C498900012B07 /* OrderDetailsPresenter.swift */; };
 		B572AC732A0C49A700012B07 /* OrderDetailsModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = B572AC722A0C49A700012B07 /* OrderDetailsModels.swift */; };
 		B572AC752A0C4A2000012B07 /* OrderDetailsRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = B572AC742A0C4A2000012B07 /* OrderDetailsRouter.swift */; };
-		B572AC782A0EA2C800012B07 /* OrdersMemStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = B572AC772A0EA2C800012B07 /* OrdersMemStore.swift */; };
+		B572AC782A0EA2C800012B07 /* OrdersMemoryStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = B572AC772A0EA2C800012B07 /* OrdersMemoryStore.swift */; };
 		B572AC7B2A0F71D200012B07 /* UIAlertController+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = B572AC7A2A0F71D200012B07 /* UIAlertController+Extensions.swift */; };
 		B572AC7D2A0F9B0B00012B07 /* Date+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = B572AC7C2A0F9B0B00012B07 /* Date+Extensions.swift */; };
 		B572AC7F2A0FCA0800012B07 /* UIViewController+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = B572AC7E2A0FCA0800012B07 /* UIViewController+Extensions.swift */; };
@@ -89,7 +89,7 @@
 		B572AC702A0C498900012B07 /* OrderDetailsPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrderDetailsPresenter.swift; sourceTree = "<group>"; };
 		B572AC722A0C49A700012B07 /* OrderDetailsModels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrderDetailsModels.swift; sourceTree = "<group>"; };
 		B572AC742A0C4A2000012B07 /* OrderDetailsRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrderDetailsRouter.swift; sourceTree = "<group>"; };
-		B572AC772A0EA2C800012B07 /* OrdersMemStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrdersMemStore.swift; sourceTree = "<group>"; };
+		B572AC772A0EA2C800012B07 /* OrdersMemoryStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrdersMemoryStore.swift; sourceTree = "<group>"; };
 		B572AC7A2A0F71D200012B07 /* UIAlertController+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIAlertController+Extensions.swift"; sourceTree = "<group>"; };
 		B572AC7C2A0F9B0B00012B07 /* Date+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+Extensions.swift"; sourceTree = "<group>"; };
 		B572AC7E2A0FCA0800012B07 /* UIViewController+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+Extensions.swift"; sourceTree = "<group>"; };
@@ -252,7 +252,7 @@
 		B572AC762A0EA2AD00012B07 /* Services */ = {
 			isa = PBXGroup;
 			children = (
-				B572AC772A0EA2C800012B07 /* OrdersMemStore.swift */,
+				B572AC772A0EA2C800012B07 /* OrdersMemoryStore.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -419,7 +419,7 @@
 				B572AC6B2A0C3D4C00012B07 /* OrderPresenter.swift in Sources */,
 				B572AC5A2A0C361A00012B07 /* OrdersRouter.swift in Sources */,
 				B572AC552A0C33CE00012B07 /* OrdersViewController.swift in Sources */,
-				B572AC782A0EA2C800012B07 /* OrdersMemStore.swift in Sources */,
+				B572AC782A0EA2C800012B07 /* OrdersMemoryStore.swift in Sources */,
 				B572AC832A0FCCED00012B07 /* OrderTableDelegateData.swift in Sources */,
 				B572AC6F2A0C490400012B07 /* OrderDetailsInteractor.swift in Sources */,
 				B572AC7B2A0F71D200012B07 /* UIAlertController+Extensions.swift in Sources */,
