@@ -1,17 +1,14 @@
 //
-//  OrderTableViewCell.swift
+//  OrderArchiveCell.swift
 //  Orderfy
 //
-//  Created by Moussa on 10/5/2023.
+//  Created by Moussa on 13/5/2023.
 //
 
+import Foundation
 import UIKit
 
-protocol OrderStatusSelectionDelegate {
-    func orderStatusSelectionChanged(id: Int, orderStatus : OrderStatus, date: Date)
-}
-
-class OrderTableViewCell: UITableViewCell {
+class OrderArchiveCell: UITableViewCell {
     private lazy var orderNameLabel: UILabel = {
         let orderNameLabel = UILabel()
         orderNameLabel.font = UIFont.systemFont(ofSize: 17, weight: .semibold)
@@ -32,9 +29,6 @@ class OrderTableViewCell: UITableViewCell {
         statusButton.layer.cornerRadius = 16
         statusButton.layer.masksToBounds = true
         statusButton.configuration = .tinted()
-        statusButton.menu = UIMenu(children: getOrderStatusUIAction())
-        statusButton.showsMenuAsPrimaryAction = true
-        statusButton.changesSelectionAsPrimaryAction = true
         return statusButton
     }()
     
@@ -96,9 +90,7 @@ class OrderTableViewCell: UITableViewCell {
         fatalError("init(coder:) has not been implemented")
     }
 
-    func configure(with order: Orders.FetchOrders.ViewModel.DisplayedOrder) {
-
-        
+    func configure(with order: OrdersArchive.FetchOrdersArchive.ViewModel.DisplayedOrderArchive) {
         idHolder = order.id
         dateHolder = order.date.getDate()
         orderLabel.text = "Nº : \(order.id)"
@@ -107,53 +99,15 @@ class OrderTableViewCell: UITableViewCell {
         case .new:
             statusButton.tintColor = UIColor.gray
             statusButton.setTitle(OrderStatus.new.rawValue, for: .normal)
-            (statusButton.menu?.children[0] as? UIAction)?.state = .on
-            (statusButton.menu?.children[0] as? UIAction)?.title = OrderStatus.new.rawValue
         case .preparing:
             statusButton.tintColor = UIColor.orange
             statusButton.setTitle(OrderStatus.preparing.rawValue, for: .normal)
-            (statusButton.menu?.children[1] as? UIAction)?.state = .on
-            (statusButton.menu?.children[1] as? UIAction)?.title = OrderStatus.preparing.rawValue
         case .ready:
             statusButton.tintColor = UIColor.purple
             statusButton.setTitle(OrderStatus.ready.rawValue, for: .normal)
-            (statusButton.menu?.children[2] as? UIAction)?.state = .on
-            (statusButton.menu?.children[2] as? UIAction)?.title = OrderStatus.ready.rawValue
-            statusButton.setNeedsLayout()
-
         case .delivered:
             statusButton.tintColor = UIColor.blue
             statusButton.setTitle(OrderStatus.delivered.rawValue, for: .normal)
-            (statusButton.menu?.children[3] as? UIAction)?.state = .on
-            (statusButton.menu?.children[3] as? UIAction)?.title = OrderStatus.delivered.rawValue
-            statusButton.setNeedsLayout()
-            runTimer()
         }
     }
-    
-    func runTimer() {
-        Timer.scheduledTimer(timeInterval: 1, target: self, selector: (#selector(self.updateTimer)), userInfo: nil, repeats: true)
-    }
-    
-    @objc func updateTimer() {
-        seconds -= 1
-        orderCounter.text = "\(seconds)"
-    }
-    
-    func getOrderStatusUIAction() -> [UIAction] {
-        
-        let orderStatusSelectionChanged = { (action: UIAction) in
-            let orderStatus = OrderStatus(rawValue: action.title)
-            self.delegate.orderStatusSelectionChanged(id: self.idHolder, orderStatus: orderStatus ?? .new, date: self.dateHolder)
-        }
-        
-        var orderStatusActions = [UIAction]()
-        for orderStatus in OrderStatus.allCases {
-            let uiAction = UIAction(title: orderStatus.rawValue, state: .on, handler: orderStatusSelectionChanged)
-            orderStatusActions.append(uiAction)
-        }
-        
-        return orderStatusActions
-    }
-    
 }

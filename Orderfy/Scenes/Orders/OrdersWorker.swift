@@ -70,6 +70,7 @@ class OrdersWorker {
 
 protocol OrdersStoreProtocol {
     func fetchOrders(completionHandler: @escaping (() throws -> [Order]) -> Void)
+    func fetchArchivedOrders(completionHandler: @escaping (() throws -> [Order]) -> Void)
     func fetchOrder(id: Int, completionHandler: @escaping (() throws -> Order?) -> Void)
     func createOrder(orderToCreate: Order, completionHandler: @escaping (Order) -> Void)
     func updateOrderStatus(id: Int, status: OrderStatus, completionHandler: @escaping (() throws -> Order?) -> Void)

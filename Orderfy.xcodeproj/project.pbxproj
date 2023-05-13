@@ -35,6 +35,13 @@
 		B572AC7D2A0F9B0B00012B07 /* Date+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = B572AC7C2A0F9B0B00012B07 /* Date+Extensions.swift */; };
 		B572AC7F2A0FCA0800012B07 /* UIViewController+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = B572AC7E2A0FCA0800012B07 /* UIViewController+Extensions.swift */; };
 		B572AC832A0FCCED00012B07 /* OrderTableDelegateData.swift in Sources */ = {isa = PBXBuildFile; fileRef = B572AC822A0FCCED00012B07 /* OrderTableDelegateData.swift */; };
+		B572AC862A0FD6AF00012B07 /* OrdersArchiveRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = B572AC852A0FD6AF00012B07 /* OrdersArchiveRouter.swift */; };
+		B572AC882A0FD6BC00012B07 /* OrdersArchiveInterractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = B572AC872A0FD6BC00012B07 /* OrdersArchiveInterractor.swift */; };
+		B572AC8A2A0FD6C500012B07 /* OrdersArchiveModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B572AC892A0FD6C500012B07 /* OrdersArchiveModel.swift */; };
+		B572AC8C2A0FD6D200012B07 /* OrdersArchiveWorker.swift in Sources */ = {isa = PBXBuildFile; fileRef = B572AC8B2A0FD6D200012B07 /* OrdersArchiveWorker.swift */; };
+		B572AC8E2A0FD6DC00012B07 /* OrdersArchivePresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = B572AC8D2A0FD6DC00012B07 /* OrdersArchivePresenter.swift */; };
+		B572AC902A0FDBC800012B07 /* OrderArchiveCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B572AC8F2A0FDBC800012B07 /* OrderArchiveCell.swift */; };
+		B572AC922A0FDEFE00012B07 /* Notification+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = B572AC912A0FDEFE00012B07 /* Notification+Extensions.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -87,6 +94,13 @@
 		B572AC7C2A0F9B0B00012B07 /* Date+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+Extensions.swift"; sourceTree = "<group>"; };
 		B572AC7E2A0FCA0800012B07 /* UIViewController+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+Extensions.swift"; sourceTree = "<group>"; };
 		B572AC822A0FCCED00012B07 /* OrderTableDelegateData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrderTableDelegateData.swift; sourceTree = "<group>"; };
+		B572AC852A0FD6AF00012B07 /* OrdersArchiveRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrdersArchiveRouter.swift; sourceTree = "<group>"; };
+		B572AC872A0FD6BC00012B07 /* OrdersArchiveInterractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrdersArchiveInterractor.swift; sourceTree = "<group>"; };
+		B572AC892A0FD6C500012B07 /* OrdersArchiveModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrdersArchiveModel.swift; sourceTree = "<group>"; };
+		B572AC8B2A0FD6D200012B07 /* OrdersArchiveWorker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrdersArchiveWorker.swift; sourceTree = "<group>"; };
+		B572AC8D2A0FD6DC00012B07 /* OrdersArchivePresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrdersArchivePresenter.swift; sourceTree = "<group>"; };
+		B572AC8F2A0FDBC800012B07 /* OrderArchiveCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrderArchiveCell.swift; sourceTree = "<group>"; };
+		B572AC912A0FDEFE00012B07 /* Notification+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Notification+Extensions.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -216,7 +230,13 @@
 		B572AC562A0C34C100012B07 /* OrdersArchive */ = {
 			isa = PBXGroup;
 			children = (
+				B572AC8F2A0FDBC800012B07 /* OrderArchiveCell.swift */,
 				B572AC572A0C34DB00012B07 /* OrdersArchiveViewController.swift */,
+				B572AC852A0FD6AF00012B07 /* OrdersArchiveRouter.swift */,
+				B572AC872A0FD6BC00012B07 /* OrdersArchiveInterractor.swift */,
+				B572AC892A0FD6C500012B07 /* OrdersArchiveModel.swift */,
+				B572AC8B2A0FD6D200012B07 /* OrdersArchiveWorker.swift */,
+				B572AC8D2A0FD6DC00012B07 /* OrdersArchivePresenter.swift */,
 			);
 			path = OrdersArchive;
 			sourceTree = "<group>";
@@ -243,6 +263,7 @@
 				B572AC7A2A0F71D200012B07 /* UIAlertController+Extensions.swift */,
 				B572AC7E2A0FCA0800012B07 /* UIViewController+Extensions.swift */,
 				B572AC7C2A0F9B0B00012B07 /* Date+Extensions.swift */,
+				B572AC912A0FDEFE00012B07 /* Notification+Extensions.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -386,8 +407,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B572AC8E2A0FD6DC00012B07 /* OrdersArchivePresenter.swift in Sources */,
 				B572AC732A0C49A700012B07 /* OrderDetailsModels.swift in Sources */,
 				B572AC582A0C34DB00012B07 /* OrdersArchiveViewController.swift in Sources */,
+				B572AC882A0FD6BC00012B07 /* OrdersArchiveInterractor.swift in Sources */,
 				B572AC7D2A0F9B0B00012B07 /* Date+Extensions.swift in Sources */,
 				B572AC712A0C498900012B07 /* OrderDetailsPresenter.swift in Sources */,
 				B572AC532A0C320800012B07 /* MainTabContainerController.swift in Sources */,
@@ -400,10 +423,15 @@
 				B572AC832A0FCCED00012B07 /* OrderTableDelegateData.swift in Sources */,
 				B572AC6F2A0C490400012B07 /* OrderDetailsInteractor.swift in Sources */,
 				B572AC7B2A0F71D200012B07 /* UIAlertController+Extensions.swift in Sources */,
+				B572AC922A0FDEFE00012B07 /* Notification+Extensions.swift in Sources */,
+				B572AC8A2A0FD6C500012B07 /* OrdersArchiveModel.swift in Sources */,
+				B572AC8C2A0FD6D200012B07 /* OrdersArchiveWorker.swift in Sources */,
+				B572AC862A0FD6AF00012B07 /* OrdersArchiveRouter.swift in Sources */,
 				B572AC6D2A0C40F500012B07 /* OrderTableViewCell.swift in Sources */,
 				B572AC692A0C3BA800012B07 /* OrderDetailsController.swift in Sources */,
 				B572AC232A0C2F7000012B07 /* ViewController.swift in Sources */,
 				B572AC752A0C4A2000012B07 /* OrderDetailsRouter.swift in Sources */,
+				B572AC902A0FDBC800012B07 /* OrderArchiveCell.swift in Sources */,
 				B572AC5E2A0C385B00012B07 /* OrdersModel.swift in Sources */,
 				B572AC1F2A0C2F7000012B07 /* AppDelegate.swift in Sources */,
 				B572AC5C2A0C383000012B07 /* OrdersInterractor.swift in Sources */,

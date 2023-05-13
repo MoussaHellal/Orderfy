@@ -93,6 +93,7 @@ class ListOrdersInteractor: OrdersBusinessLogic, OrdersDataStore {
                 let orderToRemoveIndex = self.orders?.firstIndex {order?.id == $0.id}
                 self.orders?.remove(at: orderToRemoveIndex ?? 0)
                 self.presenter?.presentOrdersAfterArchiving(response: response)
+                NotificationCenter.default.post(name: .arhivedOrder, object: nil,userInfo: nil)
             }
         }
     }

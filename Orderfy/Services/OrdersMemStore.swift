@@ -10,23 +10,16 @@ import Foundation
 class OrdersMemStore: OrdersStoreProtocol {
     // MARK: - Data
     
-    static var orders = [Order(id: 1, name: "Food", date: Date(), status: .new)]
+    static var orders = [Order]()
     static var archivedOrders = [Order]()
 
     func fetchOrders(completionHandler: @escaping (() throws -> [Order]) -> Void) {
      completionHandler { return type(of: self).orders.reversed() }
     }
     
-    func fetchOrder(id: Int, completionHandler: @escaping OrdersStoreFetchOrderCompletionHandler) {
-        let order = type(of: self).orders.filter { (order: Order) -> Bool in
-          return order.id == id
-          }.first
-        if let order = order {
-          completionHandler(OrdersStoreResult.Success(result: order))
-        } else {
-          completionHandler(OrdersStoreResult.Failure(error: OrdersStoreError.CannotFetch("Cannot fetch order with id \(id)")))
-        }
-      }
+    func fetchArchivedOrders(completionHandler: @escaping (() throws -> [Order]) -> Void) {
+     completionHandler { return type(of: self).archivedOrders }
+    }
     
     func fetchOrder(id: Int, completionHandler: @escaping (() throws -> Order?) -> Void) {
       if let index = indexOfOrderWithID(id: id) {
@@ -53,7 +46,6 @@ class OrdersMemStore: OrdersStoreProtocol {
           }
         }
     }
-    
     
     func archiveOrder(id: Int, completionHandler: @escaping (() throws -> Order?) -> Void) {
         if let index = indexOfOrderWithID(id: id) {

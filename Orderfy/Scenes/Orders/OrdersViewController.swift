@@ -4,9 +4,7 @@
 //
 //  Created by Moussa on 10/5/2023.
 //
-
 import UIKit
-
 
 protocol OrdersDisplayLogic: AnyObject {
   func displayFetchedOrders(viewModel: Orders.FetchOrders.ViewModel)
@@ -19,33 +17,6 @@ class OrdersViewController: UIViewController, OrdersDisplayLogic, UISearchBarDel
     var interactor: OrdersBusinessLogic?
     var router: (NSObjectProtocol & OrdersRoutingLogic & OrdersDataPassing)?
     var displayedOrders: [Orders.FetchOrders.ViewModel.DisplayedOrder] = []
-    
-    // MARK: Object lifecycle
-    
-    override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?)
-    {
-        super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
-        setup()
-    }
-    
-    required init?(coder aDecoder: NSCoder)
-    {
-        super.init(coder: aDecoder)
-        setup()
-    }
-    
-    private func setup() {
-        let viewController = self
-        let interactor = ListOrdersInteractor()
-        let presenter = OrdersPresenter()
-        let router = OrdersRouter()
-        viewController.interactor = interactor
-        viewController.router = router
-        interactor.presenter = presenter
-        presenter.viewController = viewController
-        router.viewController = viewController
-        router.dataStore = interactor
-    }
     
     private lazy var searchBar : UISearchBar = {
         var searchBar = UISearchBar()
@@ -86,6 +57,31 @@ class OrdersViewController: UIViewController, OrdersDisplayLogic, UISearchBarDel
         stackView.distribution = .fill
         return stackView
     }()
+    // MARK: Object lifecycle
+    override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?)
+    {
+        super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
+        setup()
+    }
+    
+    required init?(coder aDecoder: NSCoder)
+    {
+        super.init(coder: aDecoder)
+        setup()
+    }
+    
+    private func setup() {
+        let viewController = self
+        let interactor = ListOrdersInteractor()
+        let presenter = OrdersPresenter()
+        let router = OrdersRouter()
+        viewController.interactor = interactor
+        viewController.router = router
+        interactor.presenter = presenter
+        presenter.viewController = viewController
+        router.viewController = viewController
+        router.dataStore = interactor
+    }
 
     override func viewDidLoad() {
         super.viewDidLoad()
