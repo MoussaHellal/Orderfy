@@ -14,19 +14,7 @@ class OrdersWorker {
     self.ordersStore = ordersStore
   }
   
-    func fetchOrders(completionHandler: @escaping ([Order]) -> Void)
-    {
-     
-//        ordersStore.fetchOrders { ordersResult in
-//
-//            switch ordersResult {
-//            case .Success(result: let orders) :
-//                completionHandler(orders)
-//            case .Failure(let error):
-//                completionHandler([])
-//        }
-        
-        
+    func fetchOrders(completionHandler: @escaping ([Order]) -> Void) {
         ordersStore.fetchOrders { (orders: () throws -> [Order]) -> Void in
         do {
           let orders = try orders()
@@ -40,45 +28,51 @@ class OrdersWorker {
         }
       }
     }
-//
-//  func createOrder(orderToCreate: Order, completionHandler: @escaping (Order?) -> Void) {
-//    ordersStore.createOrder(orderToCreate: orderToCreate) { (order: () throws -> Order?) -> Void in
-//      do {
-//        let order = try order()
-//        DispatchQueue.main.async {
-//          completionHandler(order)
-//        }
-//      } catch {
-//        DispatchQueue.main.async {
-//          completionHandler(nil)
-//        }
-//      }
-//    }
-//  }
-//
-//  func updateOrder(orderToUpdate: Order, completionHandler: @escaping (Order?) -> Void) {
-//    ordersStore.updateOrder(orderToUpdate: orderToUpdate) { (order: () throws -> Order?) in
-//      do {
-//        let order = try order()
-//        DispatchQueue.main.async {
-//          completionHandler(order)
-//        }
-//      } catch {
-//        DispatchQueue.main.async {
-//          completionHandler(nil)
-//        }
-//      }
-//    }
-//  }
+    
+  func createOrder(orderToCreate: Order, completionHandler: @escaping (Order) -> Void) {
+    ordersStore.createOrder(orderToCreate: orderToCreate) { order -> Void in
+        completionHandler(order)
+    }
+  }
+
+  func updateOrder(id: Int, status: OrderStatus, completionHandler: @escaping (Order?) -> Void) {
+      ordersStore.updateOrderStatus(id: id, status: status) { (order: () throws -> Order?) -> Void in
+      do {
+        let order = try order()
+        DispatchQueue.main.async {
+          completionHandler(order)
+        }
+      } catch {
+        DispatchQueue.main.async {
+          completionHandler(nil)
+        }
+      }
+    }
+  }
+    
+    func archiveOrder(id: Int, status: OrderStatus, completionHandler: @escaping (Order?) -> Void) {
+        ordersStore.updateOrderStatus(id: id, status: status) { (order: () throws -> Order?) -> Void in
+        do {
+          let order = try order()
+          DispatchQueue.main.async {
+            completionHandler(order)
+          }
+        } catch {
+          DispatchQueue.main.async {
+            completionHandler(nil)
+          }
+        }
+      }
+    }
 }
 
 // MARK: - Orders store API
 
 protocol OrdersStoreProtocol {
-
-  
     func fetchOrders(completionHandler: @escaping (() throws -> [Order]) -> Void)
     func fetchOrder(id: Int, completionHandler: @escaping (() throws -> Order?) -> Void)
+    func createOrder(orderToCreate: Order, completionHandler: @escaping (Order) -> Void)
+    func updateOrderStatus(id: Int, status: OrderStatus, completionHandler: @escaping (() throws -> Order?) -> Void)
 }
 
 // MARK: - Orders store CRUD operation results

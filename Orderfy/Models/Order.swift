@@ -9,11 +9,12 @@ import Foundation
 
 struct Order: Equatable {
   var id: Int
+  var name: String
   var date: Date
   var status: OrderStatus
 }
 
-enum OrderStatus: String {
+enum OrderStatus: String, CaseIterable {
     case new = "New"
     case preparing = "Preparing"
     case ready = "Ready"

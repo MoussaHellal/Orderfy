@@ -9,6 +9,8 @@ import UIKit
 
 protocol OrdersPresentationLogic {
   func presentFetchedOrders(response: Orders.FetchOrders.Response)
+  func presentNewAddedOrder(response: Orders.CreateOrder.Response)
+  func presentUpdateOrder(response: Orders.UpdateOrder.Response)
 }
 
 class OrdersPresenter: OrdersPresentationLogic {
@@ -29,15 +31,32 @@ class OrdersPresenter: OrdersPresentationLogic {
   
   // MARK: - Fetch orders
   
-  func presentFetchedOrders(response: Orders.FetchOrders.Response)
-  {
+  func presentFetchedOrders(response: Orders.FetchOrders.Response) {
     var displayedOrders: [Orders.FetchOrders.ViewModel.DisplayedOrder] = []
     for order in response.orders {
       let date = dateFormatter.string(from: order.date)
-      let displayedOrder = Orders.FetchOrders.ViewModel.DisplayedOrder(id: order.id, date: date, status: order.status)
+        let displayedOrder = Orders.FetchOrders.ViewModel.DisplayedOrder(id: order.id, name: order.name, date: date, status: order.status)
       displayedOrders.append(displayedOrder)
     }
     let viewModel = Orders.FetchOrders.ViewModel(displayedOrders: displayedOrders)
     viewController?.displayFetchedOrders(viewModel: viewModel)
   }
+    
+    func presentNewAddedOrder(response: Orders.CreateOrder.Response) {
+        let order = response.order!
+        let date = dateFormatter.string(from: order.date)
+        let newAddedOrder = Orders.CreateOrder.ViewModel.DisplayedOrder(id: order.id, name: order.name, date: date, status: order.status)
+        let viewModel = Orders.CreateOrder.ViewModel(displayedOrder: newAddedOrder)
+        
+        viewController?.displayNewOrder(viewModel: viewModel)
+    }
+    
+    func presentUpdateOrder(response: Orders.UpdateOrder.Response) {
+        let order = response.order!
+        let date = dateFormatter.string(from: order.date)
+        let newAddedOrder = Orders.UpdateOrder.ViewModel.DisplayedOrder(id: order.id, name: order.name, date: date, status: order.status)
+        let viewModel = Orders.UpdateOrder.ViewModel(displayedOrder: newAddedOrder)
+        
+        viewController?.displayUpdatedOrder(viewModel: viewModel)
+    }
 }

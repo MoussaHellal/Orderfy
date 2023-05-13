@@ -42,6 +42,6 @@ class OrdersRouter: NSObject, OrdersRoutingLogic, OrdersDataPassing
   func passDataToShowOrder(source: OrdersDataStore, destination: inout OrderDetailsDataStore)
   {
       let selectedRow = viewController?.tableViewController.tableView.indexPathForSelectedRow?.row
-    destination.order = source.orders?[selectedRow!]
+      destination.order = source.orders?[selectedRow!]
   }
 }

@@ -9,26 +9,76 @@ import UIKit
 
 enum Orders
 {
-  // MARK: Use cases
-  
-  enum FetchOrders
-  {
-    struct Request
+    // MARK: Use cases
+    
+    enum FetchOrders
     {
+        struct Request
+        {
+        }
+        struct Response
+        {
+            var orders: [Order]
+        }
+        struct ViewModel
+        {
+            struct DisplayedOrder
+            {
+                var id: Int
+                var name: String
+                var date: String
+                var status: OrderStatus
+            }
+            var displayedOrders: [DisplayedOrder]
+        }
     }
-    struct Response
+    
+    enum CreateOrder
     {
-      var orders: [Order]
+        struct Request
+        {
+            var id: Int
+            var name: String
+        }
+        struct Response
+        {
+            var order: Order?
+        }
+        struct ViewModel
+        {
+            struct DisplayedOrder
+            {
+                var id: Int
+                var name: String
+                var date: String
+                var status: OrderStatus
+            }
+            var displayedOrder: DisplayedOrder
+        }
     }
-    struct ViewModel
+    
+    enum UpdateOrder
     {
-      struct DisplayedOrder
-      {
-        var id: Int
-        var date: String
-        var status: OrderStatus
-      }
-      var displayedOrders: [DisplayedOrder]
+        struct Request
+        {
+            var id: Int
+            var status: OrderStatus
+            var date: Date
+        }
+        struct Response
+        {
+            var order: Order?
+        }
+        struct ViewModel
+        {
+            struct DisplayedOrder
+            {
+                var id: Int
+                var name: String
+                var date: String
+                var status: OrderStatus
+            }
+            var displayedOrder: DisplayedOrder
+        }
     }
-  }
 }

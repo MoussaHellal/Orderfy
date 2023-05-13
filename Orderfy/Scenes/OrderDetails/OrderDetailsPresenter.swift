@@ -18,15 +18,10 @@ class OrderDetailsPresenter: OrderDetailsPresentationLogic
   
   let dateFormatter: DateFormatter = {
     let dateFormatter = DateFormatter()
-    dateFormatter.dateStyle = .short
-    dateFormatter.timeStyle = .none
+      dateFormatter.locale = Locale(identifier: "en_US_POSIX")
+    dateFormatter.dateStyle = .medium
+      dateFormatter.timeStyle = .medium
     return dateFormatter
-  }()
-  
-  let currencyFormatter: NumberFormatter = {
-    let currencyFormatter = NumberFormatter()
-    currencyFormatter.numberStyle = .currency
-    return currencyFormatter
   }()
   
   // MARK: - Get order
