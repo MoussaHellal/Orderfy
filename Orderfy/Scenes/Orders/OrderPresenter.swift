@@ -44,16 +44,22 @@ class OrdersPresenter: OrdersPresentationLogic {
   }
     
     func presentNewAddedOrder(response: Orders.CreateOrder.Response) {
-        let order = response.order!
+        guard let order = response.order else {
+            viewController?.displayNewOrder(viewModel: Orders.CreateOrder.ViewModel(displayedOrder: nil))
+            return
+        }
         let date = dateFormatter.string(from: order.date)
         let newAddedOrder = Orders.CreateOrder.ViewModel.DisplayedOrder(id: order.id, name: order.name, date: date, status: order.status)
         let viewModel = Orders.CreateOrder.ViewModel(displayedOrder: newAddedOrder)
-        
         viewController?.displayNewOrder(viewModel: viewModel)
     }
     
     func presentUpdateOrder(response: Orders.UpdateOrder.Response) {
-        let order = response.order!
+        guard let order = response.order else {
+            let viewModel = Orders.UpdateOrder.ViewModel(displayedOrder: nil, errorMessage: response.errorMessage)
+            viewController?.displayUpdatedOrder(viewModel: viewModel)
+            return
+        }
         let date = dateFormatter.string(from: order.date)
         let newAddedOrder = Orders.UpdateOrder.ViewModel.DisplayedOrder(id: order.id, name: order.name, date: date, status: order.status)
         let viewModel = Orders.UpdateOrder.ViewModel(displayedOrder: newAddedOrder)

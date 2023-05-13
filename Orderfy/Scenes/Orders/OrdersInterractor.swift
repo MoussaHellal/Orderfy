@@ -8,16 +8,17 @@
 import UIKit
 
 protocol OrdersBusinessLogic {
-    func fetchOrders(request: Orders.FetchOrders.Request)
+    func fetchOrders()
     func createOrder(request: Orders.CreateOrder.Request)
-    func updateOrderStatus(request: Orders.UpdateOrder.Request, completion: @escaping (String, Bool) -> ())
+    func updateOrderStatus(request: Orders.UpdateOrder.Request)
+    func searchOrder(request: Orders.SearchOrder.Request)
 }
 
 protocol OrdersDataStore {
     var orders: [Order]? { get }
 }
 
-class ListOrdersInteractor: OrdersBusinessLogic, OrdersDataStore {
+class ListOrdersInteractor: OrdersBusinessLogic, OrdersDataStore {    
     var presenter: OrdersPresentationLogic?
     
     var ordersWorker = OrdersWorker(ordersStore: OrdersMemStore())
@@ -25,7 +26,7 @@ class ListOrdersInteractor: OrdersBusinessLogic, OrdersDataStore {
     
     // MARK: - Fetch orders
     
-    func fetchOrders(request: Orders.FetchOrders.Request) {
+    func fetchOrders() {
         ordersWorker.fetchOrders { (orders) -> Void in
            self.orders = orders
             let response = Orders.FetchOrders.Response(orders: orders)
@@ -34,7 +35,16 @@ class ListOrdersInteractor: OrdersBusinessLogic, OrdersDataStore {
     }
     
     func createOrder(request: Orders.CreateOrder.Request) {
-        let order = Order(id: request.id, name: request.name, date: Date(), status: .new)
+        
+        if orders?.count ?? 0 >= 10  {
+            let response = Orders.CreateOrder.Response(order: nil)
+            self.presenter?.presentNewAddedOrder(response: response)
+            return
+        }
+        
+        let num = self.orders?.first?.id ?? 0
+        let id = num + 1
+        let order = Order(id: id, name: request.name, date: Date(), status: .new)
         ordersWorker.createOrder(orderToCreate: order) { (order: Order?) in
             self.orders?.insert(order!, at: 0)
             let response = Orders.CreateOrder.Response(order: order)
@@ -42,7 +52,7 @@ class ListOrdersInteractor: OrdersBusinessLogic, OrdersDataStore {
         }
     }
     
-    func updateOrderStatus(request: Orders.UpdateOrder.Request, completion: @escaping (String, Bool) -> ()) {
+    func updateOrderStatus(request: Orders.UpdateOrder.Request) {
         let ordersPrior = orders?.filter { $0.id < request.id
                                          && $0.status != .delivered
                                         && request.status == .delivered }
@@ -50,12 +60,16 @@ class ListOrdersInteractor: OrdersBusinessLogic, OrdersDataStore {
         let preparingOrder = orders?.filter { $0.status == .preparing}
         
         if ordersPrior?.count ?? 0 > 0  {
-            completion("You cannot mark an order as Delievered before marking the orders that came before it as Delivered.", false)
+            let errorMessage = "You cannot mark an order as Delievered before marking the orders that came before it as Delivered."
+            let response = Orders.UpdateOrder.Response(errorMessage: errorMessage, order: nil)
+            self.presenter?.presentUpdateOrder(response: response)
             return
         }
         
         if  preparingOrder?.count ?? 0 >= 3 {
-            completion("You won't be able to mark it as Preparing ⌛ because there are already 3 orders currently in that status. ", false)
+            let errorMessage = "You won't be able to mark it as Preparing ⌛ because there are already 3 orders currently in that status."
+            let response = Orders.UpdateOrder.Response(errorMessage: errorMessage, order: nil)
+            self.presenter?.presentUpdateOrder(response: response)
             return
         }
 
@@ -68,7 +82,6 @@ class ListOrdersInteractor: OrdersBusinessLogic, OrdersDataStore {
             if request.status == .delivered {
                 self.archiveOrder(request: request)
             }
-            completion("Success", true)
         }
     }
     
@@ -83,4 +96,15 @@ class ListOrdersInteractor: OrdersBusinessLogic, OrdersDataStore {
             }
         }
     }
+    
+    func searchOrder(request: Orders.SearchOrder.Request) {
+        guard request.id != 0 || !request.name.isEmpty else {
+            self.fetchOrders()
+            return
+        }
+        let orders = orders?.filter { $0.id == request.id || $0.name.lowercased().contains(request.name.lowercased())}
+        let response = Orders.FetchOrders.Response(orders: orders!)
+        self.presenter?.presentFetchedOrders(response: response)
+    }
+    
 }

@@ -37,6 +37,56 @@ enum Orders
     {
         struct Request
         {
+            var name: String
+        }
+        struct Response
+        {
+            var order: Order?
+        }
+        struct ViewModel
+        {
+            struct DisplayedOrder
+            {
+                var id: Int
+                var name: String
+                var date: String
+                var status: OrderStatus
+            }
+            var displayedOrder: DisplayedOrder?
+        }
+    }
+    
+    enum UpdateOrder
+    {
+        struct Request
+        {
+            var id: Int
+            var status: OrderStatus
+            var date: Date
+        }
+        struct Response
+        {
+            var errorMessage: String?
+            var order: Order?
+        }
+        struct ViewModel
+        {
+            struct DisplayedOrder
+            {
+                var id: Int
+                var name: String
+                var date: String
+                var status: OrderStatus
+            }
+            var displayedOrder: DisplayedOrder?
+            var errorMessage: String?
+        }
+    }
+    
+    enum SearchOrder
+    {
+        struct Request
+        {
             var id: Int
             var name: String
         }
@@ -53,32 +103,7 @@ enum Orders
                 var date: String
                 var status: OrderStatus
             }
-            var displayedOrder: DisplayedOrder
-        }
-    }
-    
-    enum UpdateOrder
-    {
-        struct Request
-        {
-            var id: Int
-            var status: OrderStatus
-            var date: Date
-        }
-        struct Response
-        {
-            var order: Order?
-        }
-        struct ViewModel
-        {
-            struct DisplayedOrder
-            {
-                var id: Int
-                var name: String
-                var date: String
-                var status: OrderStatus
-            }
-            var displayedOrder: DisplayedOrder
+            var displayedOrders: [DisplayedOrder]
         }
     }
 }
