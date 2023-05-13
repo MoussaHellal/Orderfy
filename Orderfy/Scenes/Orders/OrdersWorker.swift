@@ -50,8 +50,8 @@ class OrdersWorker {
     }
   }
     
-    func archiveOrder(id: Int, status: OrderStatus, completionHandler: @escaping (Order?) -> Void) {
-        ordersStore.updateOrderStatus(id: id, status: status) { (order: () throws -> Order?) -> Void in
+    func archiveOrder(id: Int, completionHandler: @escaping (Order?) -> Void) {
+        ordersStore.archiveOrder(id: id) { (order: () throws -> Order?) -> Void in
         do {
           let order = try order()
           DispatchQueue.main.async {
@@ -73,6 +73,7 @@ protocol OrdersStoreProtocol {
     func fetchOrder(id: Int, completionHandler: @escaping (() throws -> Order?) -> Void)
     func createOrder(orderToCreate: Order, completionHandler: @escaping (Order) -> Void)
     func updateOrderStatus(id: Int, status: OrderStatus, completionHandler: @escaping (() throws -> Order?) -> Void)
+    func archiveOrder(id: Int, completionHandler: @escaping (() throws -> Order?) -> Void)
 }
 
 // MARK: - Orders store CRUD operation results

@@ -64,20 +64,23 @@ class ListOrdersInteractor: OrdersBusinessLogic, OrdersDataStore {
             self.presenter?.presentUpdateOrder(response: response)
             let orderToUpdateIndex = self.orders?.firstIndex {order?.id == $0.id}
             self.orders?[orderToUpdateIndex ?? 0] = order!
+            
+            if request.status == .delivered {
+                self.archiveOrder(request: request)
+            }
             completion("Success", true)
         }
     }
     
     func archiveOrder(request: Orders.UpdateOrder.Request) {
-        DispatchQueue.main.asyncAfter(deadline: .now() + 0.15) {
-            ordersWorker.updateOrder(id: request.id, status: request.status) { (order: Order?) in
+        DispatchQueue.main.asyncAfter(deadline: .now() + 15) { [weak self] in
+            guard let self = self else {return}
+            self.ordersWorker.archiveOrder(id: request.id) { (order: Order?) in
                 let response = Orders.UpdateOrder.Response(order: order)
-                self.presenter?.presentUpdateOrder(response: response)
-                let orderToUpdateIndex = self.orders?.firstIndex {order?.id == $0.id}
-                self.orders?[orderToUpdateIndex ?? 0] = order!
+                let orderToRemoveIndex = self.orders?.firstIndex {order?.id == $0.id}
+                self.orders?.remove(at: orderToRemoveIndex ?? 0)
+                self.presenter?.presentOrdersAfterArchiving(response: response)
             }
         }
-        
-        
     }
 }

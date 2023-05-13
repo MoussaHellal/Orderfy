@@ -12,6 +12,7 @@ protocol OrdersDisplayLogic: AnyObject {
   func displayFetchedOrders(viewModel: Orders.FetchOrders.ViewModel)
   func displayNewOrder(viewModel: Orders.CreateOrder.ViewModel)
   func displayUpdatedOrder(viewModel: Orders.UpdateOrder.ViewModel)
+  func displayOrdersAfterArchiving(viewModel: Orders.UpdateOrder.ViewModel)
 }
 
 class OrdersViewController: UIViewController, OrdersDisplayLogic, OrderStatusSelectionDelegate {
@@ -91,6 +92,13 @@ class OrdersViewController: UIViewController, OrdersDisplayLogic, OrderStatusSel
         var updatedOrderIndex = displayedOrders.firstIndex { return $0.id == order.id }
         displayedOrders[updatedOrderIndex ?? 0].status = order.status
         print(displayedOrders)
+        tableViewController.tableView.reloadData()
+    }
+    
+    func displayOrdersAfterArchiving(viewModel: Orders.UpdateOrder.ViewModel) {
+        let order = viewModel.displayedOrder
+        let archivedOrderIndex = displayedOrders.firstIndex { return $0.id == order.id } ?? 0
+        displayedOrders.remove(at: archivedOrderIndex)
         tableViewController.tableView.reloadData()
     }
     
@@ -219,4 +227,6 @@ extension OrdersViewController: UITableViewDelegate, UITableViewDataSource {
             }
         })
     }
+    
+    
 }

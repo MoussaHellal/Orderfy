@@ -45,12 +45,24 @@ class OrdersMemStore: OrdersStoreProtocol {
     
     func updateOrderStatus(id: Int, status: OrderStatus, completionHandler: @escaping (() throws -> Order?) -> Void) {
         if let index = indexOfOrderWithID(id: id) {
-            type(of: self).orders[index].status = status
-            print(type(of: self).orders)
+        type(of: self).orders[index].status = status
           let order = type(of: self).orders[index]
           completionHandler { return order }
         } else {
           completionHandler { throw OrdersStoreError.CannotUpdate("Cannot fetch order with id \(String(describing: id)) to update")
+          }
+        }
+    }
+    
+    
+    func archiveOrder(id: Int, completionHandler: @escaping (() throws -> Order?) -> Void) {
+        if let index = indexOfOrderWithID(id: id) {
+          let orderToArchive = type(of: self).orders[index]
+          type(of: self).orders.remove(at: index)
+          type(of: self).archivedOrders.insert(orderToArchive, at: 0)
+          completionHandler { return orderToArchive }
+        } else {
+          completionHandler { throw OrdersStoreError.CannotUpdate("Cannot fetch order with id \(String(describing: id)) to archive")
           }
         }
     }

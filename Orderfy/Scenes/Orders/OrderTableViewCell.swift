@@ -11,12 +11,16 @@ class OrderTableViewCell: UITableViewCell {
 
     let orderNameLabel = UILabel()
     let orderLabel = UILabel()
-    let statusLabel = UILabel()
+    let orderCounter = UILabel()
     let statusView = UIButton()
     let stackView = UIStackView()
     var idHolder: Int = 0
     var dateHolder: Date = Date()
 
+    var seconds = 15
+    var timer = Timer()
+    var isTimeRunning = false
+    
     var delegate: OrderStatusSelectionDelegate!
 
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
@@ -39,11 +43,10 @@ class OrderTableViewCell: UITableViewCell {
         statusView.configuration = .tinted()
 
        
-        statusLabel.textColor = .white
-        statusLabel.font = UIFont.systemFont(ofSize: 17, weight: .semibold)
-        statusLabel.translatesAutoresizingMaskIntoConstraints = false
+        orderCounter.textColor = .black
+        orderCounter.font = UIFont.systemFont(ofSize: 17, weight: .semibold)
+        orderCounter.translatesAutoresizingMaskIntoConstraints = false
         
-        statusView.addSubview(statusLabel)
         statusView.menu = UIMenu(children: getOrderStatusUIAction())
         
         statusView.showsMenuAsPrimaryAction = true
@@ -54,6 +57,7 @@ class OrderTableViewCell: UITableViewCell {
         stackView.alignment = .center
         stackView.spacing = 15
         stackView.addArrangedSubview(orderNameLabel)
+        stackView.addArrangedSubview(orderCounter)
         stackView.addArrangedSubview(orderLabel)
         stackView.addArrangedSubview(statusView)
 
@@ -65,9 +69,7 @@ class OrderTableViewCell: UITableViewCell {
             stackView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 20),
             stackView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -20),
             stackView.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 8),
-            stackView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -8),
-            statusLabel.centerXAnchor.constraint(equalTo: statusView.centerXAnchor),
-            statusLabel.centerYAnchor.constraint(equalTo: statusView.centerYAnchor)
+            stackView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -8)
         ])
     }
 
@@ -76,6 +78,8 @@ class OrderTableViewCell: UITableViewCell {
     }
 
     func configure(with order: Orders.FetchOrders.ViewModel.DisplayedOrder) {
+
+        
         idHolder = order.id
         dateHolder = order.date.getDate()
         orderLabel.text = "Nº - \(order.id)"
@@ -104,7 +108,17 @@ class OrderTableViewCell: UITableViewCell {
             (statusView.menu?.children[3] as? UIAction)?.state = .on
             (statusView.menu?.children[3] as? UIAction)?.title = OrderStatus.delivered.rawValue
             statusView.setNeedsLayout()
+            runTimer()
         }
+    }
+    
+    func runTimer() {
+        Timer.scheduledTimer(timeInterval: 1, target: self, selector: (#selector(self.updateTimer)), userInfo: nil, repeats: true)
+    }
+    
+    @objc func updateTimer() {
+        seconds -= 1
+        orderCounter.text = "\(seconds)"
     }
     
     func getOrderStatusUIAction() -> [UIAction] {
